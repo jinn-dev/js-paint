@@ -4,6 +4,7 @@ const colors = document.getElementsByClassName("jsColor");
 const range = document.getElementById("jsRange");
 const mode = document.getElementById("jsMode");
 const saveBtn = document.getElementById("jsSave");
+const clearBtn = document.getElementById("jsClear");
 
 const INITIAL_COLOR = "#000000";
 const CANVAS_SIZE = 700;
@@ -94,6 +95,10 @@ function handleSaveClick(event) {
   link.click();
 }
 
+function handleClearClick(event) {
+  ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+}
+
 Array.from(colors).forEach((color) => {
   color.addEventListener("click", handleColorClick);
 });
@@ -118,4 +123,8 @@ if(mode) {
 
 if(saveBtn) {
   saveBtn.addEventListener("click", handleSaveClick);
+}
+
+if(clearBtn) {
+  clearBtn.addEventListener("click", handleClearClick);
 }
