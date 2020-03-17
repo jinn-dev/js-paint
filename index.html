@@ -7,6 +7,31 @@
     <title>Document</title>
 </head>
 <body>
+    <!--자바스크립트는 id, css는 class를 쓰도록 권장-->
+    <canvas id="jsCanvas" class="canvas"></canvas>
+    <div class="controls">
+      <div class="controls_range">
+        <input type="range" id="jsRange" min="0.1" max="5.0" value="2.5" step="0.1"/>
+      </div>
+      <div class="controls_btns">
+        <button id="jsMode">
+          Fill
+        </button>
+        <button id="jsSave">
+          Save
+        </button></div>
+      <div class="controls_colors" id="jsColors">
+        <div class="controls_color jsColor"  style="background-color: #000000"></div>
+        <div class="controls_color jsColor" style="background-color:#ffffff"></div>
+        <div class="controls_color jsColor" style="background-color: #ff0000"></div>
+        <div class="controls_color jsColor" style="background-color: #b44510"></div>
+        <div class="controls_color jsColor" style="background-color: #e9d33d"></div>
+        <div class="controls_color jsColor" style="background-color: #1c9412"></div>
+        <div class="controls_color jsColor" style="background-color: #49a4cb"></div>
+        <div class="controls_color jsColor" style="background-color: #152bee"></div>
+        <div class="controls_color jsColor" style="background-color: #470098"></div>
+      </div>
+    </div>
     <script src="app.js"></script>
 </body>
 </html>
