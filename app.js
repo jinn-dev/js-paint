@@ -25,17 +25,32 @@ ctx.lineWidth = 2.5;
 let painting = false;
 let filling = false;
 
+let stopScrolling = false;
+
+window.addEventListener("touchmove", handleTouchMove, {
+  passive: false
+});
+
+function handleTouchMove(event) {
+  if(!stopScrolling) {
+    return;
+  }
+}
+
 function startPainting() {
+  stopScrolling = false;
   painting = true;
 }
 
 function stopPainting() {
+  stopScrolling = false;
   painting = false;
 }
 
 function onMouseMove(event) {
-  const x = event.offsetX;
-  const y = event.offsetY;
+  var rect = canvas.getBoundingClientRect();
+  const x = event.offsetX ;
+  const y = event.offsetY ;
   if(!painting) {
 
     //console.log("creating path in ", x, y);
@@ -52,6 +67,7 @@ function onMouseMove(event) {
 
 function onMouseDown(event) {
   painting = true;
+  stopScrolling = true;
 }
 
 function handleColorClick(event) {
@@ -86,6 +102,7 @@ function handleCM(event) {
 
 }
 
+
 function handleSaveClick(event) {
   //cavas의 image를 데이터로 변경해야 함
   const image = canvas.toDataURL();
@@ -111,7 +128,36 @@ if(canvas) {
   canvas.addEventListener("onMouseleave", stopPainting);
   canvas.addEventListener("click", handleCanvasClick);
   canvas.addEventListener("contextmenu", handleCM);
+
+
+  //Set up touch events for mobile, etc
+  canvas.addEventListener("touchmove", onTouchMove, false);
+  canvas.addEventListener("touchstart", onMouseDown, false);
+  canvas.addEventListener("touchend", stopPainting, false);
 }
+
+function onTouchMove(event) {
+  
+    const x = event.touches[0].clientX;
+    const y = event.touches[0].clientY;
+    /*
+    var mouseEvent = new MouseEvent("mousemove", {
+      clientX: x,
+      clienY: y
+    });
+    canvas.dispatchEvent(mouseEvent);
+    */
+    if(!painting) {
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+    } 
+    else {
+      ctx.lineTo(x, y); //path의 이전위치에서 지금위치까지 선을 만든다.
+      ctx.stroke();
+    }
+    
+}
+
 
 if(range) {
   range.addEventListener("input", handleRange);
