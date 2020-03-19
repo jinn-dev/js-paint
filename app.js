@@ -7,7 +7,7 @@ const saveBtn = document.getElementById("jsSave");
 const clearBtn = document.getElementById("jsClear");
 
 const INITIAL_COLOR = "#000000";
-const CANVAS_SIZE = 700;
+const CANVAS_SIZE = 350;
 
 //pixel modifier
 canvas.width = CANVAS_SIZE;
